@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JSeparator;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LandingPage extends JFrame {
 
@@ -53,6 +55,12 @@ public class LandingPage extends JFrame {
 		contentPane.add(lblMustConnect);
 		
 		JButton btnConnect = new JButton("Σύνδεση");
+		btnConnect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getLandingPage().setVisible(false);
+				Main.getLoginPage().setVisible(true);
+			}
+		});
 		btnConnect.setEnabled(false);
 		btnConnect.setForeground(new Color(255, 255, 255));
 		btnConnect.setBackground(new Color(0, 128, 0));

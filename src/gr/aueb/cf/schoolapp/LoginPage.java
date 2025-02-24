@@ -16,6 +16,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class LoginPage extends JFrame {
 
@@ -38,23 +39,25 @@ public class LoginPage extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Σύνδεση");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(169, 23, 60, 38);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel.setBounds(184, 11, 73, 38);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Παρακαλώ εισάγετε τους κωδικούς σας για να συνδεθείτε");
-		lblNewLabel_1.setBounds(84, 56, 347, 38);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblMessage = new JLabel("Παρακαλώ εισάγετε τους κωδικούς σας για να συνδεθείτε");
+		lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessage.setBounds(47, 40, 347, 38);
+		contentPane.add(lblMessage);
 		
-		JLabel lblNewLabel_2 = new JLabel("Χρήστης:");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_2.setBounds(127, 99, 60, 24);
-		contentPane.add(lblNewLabel_2);
+		JLabel lblUser = new JLabel("Χρήστης:");
+		lblUser.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblUser.setBounds(127, 99, 60, 24);
+		contentPane.add(lblUser);
 		
-		JLabel lblNewLabel_3 = new JLabel("Κωδικός:");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_3.setBounds(127, 157, 60, 29);
-		contentPane.add(lblNewLabel_3);
+		JLabel lblPassword = new JLabel("Κωδικός:");
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblPassword.setBounds(127, 157, 60, 29);
+		contentPane.add(lblPassword);
 		
 		username = new JTextField();
 		username.setBounds(127, 124, 197, 30);
@@ -67,7 +70,7 @@ public class LoginPage extends JFrame {
 		contentPane.add(password);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(47, 89, 360, 1);
+		separator.setBounds(40, 77, 360, 1);
 		contentPane.add(separator);
 		
 		JButton btnConnect = new JButton("Σύνδεση");
@@ -88,7 +91,7 @@ public class LoginPage extends JFrame {
 		btnConnect.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnConnect.setBackground(new Color(0, 128, 0));
 		btnConnect.setForeground(new Color(255, 255, 255));
-		btnConnect.setBounds(127, 234, 197, 33);
+		btnConnect.setBounds(127, 234, 197, 38);
 		contentPane.add(btnConnect);
 	}
 }

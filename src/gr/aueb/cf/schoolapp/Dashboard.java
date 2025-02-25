@@ -91,6 +91,16 @@ public class Dashboard extends JFrame {
 		leftPanel.add(lbl_teachers);
 		
 		JLabel lbl_teachersView = new JLabel("Προβολή Εκπαιδευτών");
+		lbl_teachersView.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_teachersView.setText("<html><font color='blue'>Προβολή Εκπαιδευτών</font></html>");
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lbl_teachersView.setText("Προβολή Εκπαιδευτών");
+			}
+		});
 
 		lbl_teachersView.setForeground(Color.WHITE);
 		lbl_teachersView.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -98,6 +108,16 @@ public class Dashboard extends JFrame {
 		leftPanel.add(lbl_teachersView);
 		
 		JLabel lbl_teacherInsert = new JLabel("Εισαγωγή Εκπαιδευτή");
+		lbl_teacherInsert.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_teacherInsert.setText("<html><font color='blue'>Εισαγωγή Εκπαιδευτή</font></html>");
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lbl_teacherInsert.setText("Εισαγωγή Εκπαιδευτή");
+			}
+		});
 
 		lbl_teacherInsert.setForeground(Color.WHITE);
 		lbl_teacherInsert.setFont(new Font("Tahoma", Font.PLAIN, 12));

@@ -26,23 +26,7 @@ public class Dashboard extends JFrame {
 	private static Connection connection;
 	
 	public Dashboard() {
-//		addWindowListener(new WindowAdapter() {
-//			@Override
-//			public void windowOpened(WindowEvent e) {
-//				String sql = "jdbc:mysql://localhost:3306/schooldb7staging?serverTimeZone=UTC";
-//				String username = "user7";
-//				String password = "12345";		// Password should not appear (not be visible) in code-base.
-//				// String password = System.getenv("TS_USER_PASSWORD");
-//				
-//				try {
-//					// Class.forName("com.mysql.cj.jdbc.Driver");
-//					connection = DriverManager.getConnection(sql, username, password);
-//					System.out.println("Connection Success");
-//				} catch (SQLException e1) {
-//					e1.printStackTrace();
-//				}
-//			}
-//		});
+
 		setTitle("Ποιότητα στην Εκπαίδευση");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 759, 467);
@@ -107,37 +91,14 @@ public class Dashboard extends JFrame {
 		leftPanel.add(lbl_teachers);
 		
 		JLabel lbl_teachersView = new JLabel("Προβολή Εκπαιδευτών");
-//		lbl_teachersView.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseEntered(MouseEvent e) {
-//				lbl_teachersView.setText("<html><font color='blue'>Προβολή Εκπαιδευτών</font></html>");
-//			}
-//			@Override
-//			public void mouseExited(MouseEvent e) {
-//				lbl_teachersView.setText("Προβολή Εκπαιδευτών");
-//			}
-//		});
+
 		lbl_teachersView.setForeground(Color.WHITE);
 		lbl_teachersView.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lbl_teachersView.setBounds(15, 61, 153, 26);
 		leftPanel.add(lbl_teachersView);
 		
 		JLabel lbl_teacherInsert = new JLabel("Εισαγωγή Εκπαιδευτή");
-//		lbl_teacherInsert.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseEntered(MouseEvent e) {
-//				lbl_teacherInsert.setText("<html><font color='blue'>Εισαγωγή Εκπαιδευτή</font></html>");
-//			}
-//			@Override
-//			public void mouseExited(MouseEvent e) {
-//				lbl_teacherInsert.setText("Εισαγωγή Εκπαιδευτή");
-//			}
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				Main.getDashboard().setEnabled(true);
-//				Main.getInsertTeacherPage().setVisible(true);
-//			}
-//		});
+
 		lbl_teacherInsert.setForeground(Color.WHITE);
 		lbl_teacherInsert.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lbl_teacherInsert.setBounds(15, 87, 153, 26);
@@ -169,12 +130,7 @@ public class Dashboard extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JButton btnViewTeachers = new JButton("Συνέχεια");
-//		btnViewTeachers.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				Main.getDashboard().setEnabled(true);
-//				Main.getViewTeachersPage().setVisible(true);
-//			}
-//		});
+
 		btnViewTeachers.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnViewTeachers.setForeground(new Color(255, 255, 255));
 		btnViewTeachers.setBackground(new Color(0, 128, 64));
@@ -192,12 +148,7 @@ public class Dashboard extends JFrame {
 		contentPane.add(lblNewLabel_1_1);
 		
 		JButton btnInsertTeacher = new JButton("Συνέχεια");
-//		btnInsertTeacher.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				Main.getDashboard().setEnabled(false);
-//				Main.getInsertTeacherPage().setVisible(true);
-//			}
-//		});
+
 		btnInsertTeacher.setForeground(Color.WHITE);
 		btnInsertTeacher.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnInsertTeacher.setBackground(new Color(0, 128, 64));

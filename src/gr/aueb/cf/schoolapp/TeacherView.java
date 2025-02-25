@@ -185,16 +185,16 @@ public class TeacherView extends JFrame {
 		lblZipcode.setBounds(70, 452, 128, 27);
 		contentPane.add(lblZipcode);
 		
-		JButton btnNewButton = new JButton("Κλείσιμο");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnClose = new JButton("Κλείσιμο");
+		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Main.getViewTeachersPage().setEnabled(true);
 				Main.getTeacherView().setVisible(false);
-				Main.getDashboard().setEnabled(true);
 			}
 		});
 		
-		btnNewButton.setBounds(469, 471, 134, 57);
-		contentPane.add(btnNewButton);
+		btnClose.setBounds(469, 471, 134, 57);
+		contentPane.add(btnClose);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(20, 233, 597, 1);

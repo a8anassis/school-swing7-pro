@@ -123,6 +123,12 @@ public class ViewTeachersPage extends JFrame {
 		contentPane.add(scrollPane);
 		
 		JButton viewBtn = new JButton("Προβολή");
+		viewBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getViewTeachersPage().setEnabled(false);
+				Main.getTeacherView().setVisible(true);
+			}
+		});
 		viewBtn.setForeground(new Color(255, 255, 255));
 		
 		viewBtn.setBackground(new Color(0, 128, 0));
@@ -131,6 +137,12 @@ public class ViewTeachersPage extends JFrame {
 		contentPane.add(viewBtn);
 		
 		JButton updateBtn = new JButton("Επεξεργασία");
+		updateBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getViewTeachersPage().setEnabled(false);
+				Main.getUpdateTeacherPage().setVisible(true);
+			}
+		});
 		updateBtn.setForeground(new Color(255, 255, 255));
 		
 		updateBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -152,6 +164,12 @@ public class ViewTeachersPage extends JFrame {
 		contentPane.add(lineBottom_2);
 		
 		JButton closeBtn = new JButton("Κλείσιμο");
+		closeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getViewTeachersPage().setVisible(false);
+				Main.getDashboard().setEnabled(true);
+			}
+		});
 		
 		closeBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		closeBtn.setBackground(Color.LIGHT_GRAY);

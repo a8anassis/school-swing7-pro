@@ -229,8 +229,8 @@ public class UpdateTeacherPage extends JFrame {
 		JButton closeBtn = new JButton("Κλείσιμο");
 		closeBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Main.getViewTeachersPage().setEnabled(true);
 				Main.getUpdateTeacherPage().setVisible(false);
-				Main.getDashboard().setEnabled(true);	
 			}
 		});
 		

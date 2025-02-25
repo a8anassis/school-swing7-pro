@@ -100,6 +100,13 @@ public class Dashboard extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lbl_teachersView.setText("Προβολή Εκπαιδευτών");
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+					Main.getDashboard().setEnabled(false);
+					Main.getViewTeachersPage().setVisible(true);
+				
+			}
 		});
 
 		lbl_teachersView.setForeground(Color.WHITE);
@@ -116,6 +123,11 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lbl_teacherInsert.setText("Εισαγωγή Εκπαιδευτή");
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Main.getDashboard().setEnabled(false);
+				Main.getInsertTeacherPage().setVisible(true);
 			}
 		});
 

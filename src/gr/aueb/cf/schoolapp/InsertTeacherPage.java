@@ -226,6 +226,12 @@ public class InsertTeacherPage extends JFrame {
 		contentPane.add(insertBtn);
 		
 		JButton closeBtn = new JButton("Κλείσιμο");
+		closeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getInsertTeacherPage().setVisible(false);
+				Main.getDashboard().setEnabled(true);
+			}
+		});
 
 		closeBtn.setForeground(new Color(0, 0, 0));
 		closeBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));

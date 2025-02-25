@@ -227,6 +227,12 @@ public class UpdateTeacherPage extends JFrame {
 		contentPane.add(updateBtn);
 		
 		JButton closeBtn = new JButton("Κλείσιμο");
+		closeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getUpdateTeacherPage().setVisible(false);
+				Main.getDashboard().setEnabled(true);	
+			}
+		});
 		
 		closeBtn.setForeground(new Color(0, 0, 0));
 		closeBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));

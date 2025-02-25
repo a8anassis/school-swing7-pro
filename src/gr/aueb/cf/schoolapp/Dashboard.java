@@ -148,6 +148,12 @@ public class Dashboard extends JFrame {
 		contentPane.add(lblNewLabel_1_1);
 		
 		JButton btnInsertTeacher = new JButton("Συνέχεια");
+		btnInsertTeacher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getDashboard().setEnabled(false);
+				
+			}
+		});
 
 		btnInsertTeacher.setForeground(Color.WHITE);
 		btnInsertTeacher.setFont(new Font("Tahoma", Font.PLAIN, 12));

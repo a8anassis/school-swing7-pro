@@ -51,7 +51,7 @@ public class LandingPage extends JFrame {
 		
 		JLabel lblMustConnect = new JLabel("Για να προχωρήσετε πρέπει να συνδεθείτε");
 		lblMustConnect.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblMustConnect.setBounds(35, 147, 259, 42);
+		lblMustConnect.setBounds(35, 146, 259, 42);
 		contentPane.add(lblMustConnect);
 		
 		JButton btnConnect = new JButton("Σύνδεση");
@@ -82,14 +82,14 @@ public class LandingPage extends JFrame {
 		
 		JLabel lblPrivacy = new JLabel("Δήλωση Ιδιωτικότητας");
 		lblPrivacy.setForeground(new Color(0, 0, 255));
-		lblPrivacy.setBounds(235, 196, 130, 23);
+		lblPrivacy.setBounds(241, 196, 130, 23);
 		contentPane.add(lblPrivacy);
 		
 		
 		contentPane.add(btnConnect);
 		
 		JPanel footer = new JPanel();
-		footer.setBounds(0, 322, 746, 97);
+		footer.setBounds(0, 330, 746, 97);
 		contentPane.add(footer);
 		footer.setLayout(null);
 		

@@ -74,20 +74,7 @@ public class LoginPage extends JFrame {
 		contentPane.add(separator);
 		
 		JButton btnConnect = new JButton("Σύνδεση");
-		btnConnect.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (username.getText().matches("[aA]dmin") && Arrays.equals(password.getPassword(), "12345".toCharArray())) {
-//					Main.getLoginPage().setEnabled(false);
-//					Main.getDashboard().setVisible(true);
-//					Main.getLoginPage().setVisible(false);
-				} else {
-					JOptionPane.showMessageDialog(null,  "Λάθος username ή password", "Αδυναμία σύνδεσης", JOptionPane.ERROR_MESSAGE);
-					username.setText("");
-					password.setText("");
-					return;
-				}
-			}
-		});
+		
 		btnConnect.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnConnect.setBackground(new Color(0, 128, 0));
 		btnConnect.setForeground(new Color(255, 255, 255));

@@ -26,6 +26,26 @@ public class Dashboard extends JFrame {
 	private static Connection connection;
 	
 	public Dashboard() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				String sql = "jdbc:mysql://localhost:3306/xxx?serverTimezone=UTC";
+				String username = "user7";
+				String password = "12345";
+				
+				try {
+					// Class.forName("com.mysql.cj.jdbc.Driver");
+					connection = DriverManager.getConnection(sql, username, password);
+					System.out.println("Connection success");
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} 
+//				catch (ClassNotFoundException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+			}
+		});
 
 		setTitle("Ποιότητα στην Εκπαίδευση");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -203,7 +223,4 @@ public class Dashboard extends JFrame {
 	public static Connection getConnection() {
 		return connection;
 	}
-	
-	
-	
 }

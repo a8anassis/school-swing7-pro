@@ -130,6 +130,12 @@ public class Dashboard extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JButton btnViewTeachers = new JButton("Συνέχεια");
+		btnViewTeachers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getDashboard().setEnabled(false);
+				Main.getViewTeachersPage().setVisible(true);
+			}
+		});
 
 		btnViewTeachers.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnViewTeachers.setForeground(new Color(255, 255, 255));
@@ -151,7 +157,7 @@ public class Dashboard extends JFrame {
 		btnInsertTeacher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.getDashboard().setEnabled(false);
-				
+				Main.getInsertTeacherPage().setVisible(true);
 			}
 		});
 

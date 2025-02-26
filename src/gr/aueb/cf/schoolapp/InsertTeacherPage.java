@@ -218,6 +218,10 @@ public class InsertTeacherPage extends JFrame {
         
 		
 		JButton insertBtn = new JButton("Υποβολή");
+		insertBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
 		insertBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		insertBtn.setForeground(new Color(255, 255, 255));

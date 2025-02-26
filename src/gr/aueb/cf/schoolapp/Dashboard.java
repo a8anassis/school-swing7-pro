@@ -29,8 +29,8 @@ public class Dashboard extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
-				String sql = "jdbc:mysql://localhost:3306/xxx?serverTimezone=UTC";
-				String username = "user7";
+				String sql = "jdbc:mysql://localhost:3306/school7dbpro?serverTimezone=UTC";
+				String username = "user7pro";
 				String password = "12345";
 				
 				try {

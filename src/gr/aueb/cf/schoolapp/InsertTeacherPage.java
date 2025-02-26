@@ -130,13 +130,30 @@ public class InsertTeacherPage extends JFrame {
 		contentPane.add(firstnameText);
 		firstnameText.setColumns(10);
 		
-
+		firstnameText.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				String inputFirstname;	
+				inputFirstname = firstnameText.getText().trim();	
+				
+				errorFirstname.setText(inputFirstname.equals("") ? "Το όνομα είναι υποχρεωτικό" : "");
+			}
+		});
 		
 		lastnameText = new JTextField();
 		lastnameText.setColumns(10);
 		lastnameText.setBounds(512, 131, 263, 37);
 		contentPane.add(lastnameText);
 		
+		lastnameText.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				String inputLastname;	
+				inputLastname = lastnameText.getText().trim();	
+				
+				errorLastname.setText(inputLastname.equals("") ? "Το επώνυμο είναι υποχρεωτικό" : "");
+			}
+		});
 
 		JLabel lblFirstname = new JLabel("Όνομα*");
 		lblFirstname.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -241,6 +258,38 @@ public class InsertTeacherPage extends JFrame {
 		JButton insertBtn = new JButton("Υποβολή");
 		insertBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Data Binding
+			
+				String firstname = firstnameText.getText().trim();
+				String lastname = lastnameText.getText().trim();
+				String vat = vatText.getText().trim();
+				String fathername = fathernameText.getText().trim();
+				String phoneNumber = phoneNumberText.getText().trim();
+				String email = emailText.getText().trim();
+				String street = streetText.getText().trim();
+				String streetNumber = streetNumberText.getText().trim();
+				City selectedCity = (City) cityComboBox.getSelectedItem();
+				int cityId = selectedCity.getId();
+				String zipcode = zipcodeText.getText().trim();
+				
+				
+				// Validation
+				
+				errorFirstname.setText(firstname.equals("") ? "Το όνομα είναι υποχρεωτικό" : "");
+
+				// Validate last name
+				errorLastname.setText(lastname.equals("") ? "Το επώνυμο είναι υποχρεωτικό" : "");
+
+				// Return if any field is empty
+				if (selectedCity == null || firstname.equals("") || lastname.equals("")) {
+					JOptionPane.showMessageDialog(null, "Please fill all fields!", "Error", JOptionPane.ERROR_MESSAGE);
+				    return;
+				}
+               
+				
+				// Insert
+				
+				
 			}
 		});
 		

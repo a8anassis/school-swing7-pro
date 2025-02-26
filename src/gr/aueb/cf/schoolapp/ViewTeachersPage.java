@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JTable;
@@ -33,10 +34,21 @@ public class ViewTeachersPage extends JFrame {
 	private JTextField lastnameText;
 	private JTable table;
 	private DefaultTableModel model = new DefaultTableModel();
-	private int selectedId;
+	//private int selectedId;
+	private String selectedId;
+	private String selectedUUID;
 
 	public ViewTeachersPage() {
-		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+//				buildTable();
+			}
+			@Override
+			public void windowActivated(WindowEvent e) {
+				buildTable();
+			}
+		});
 		setTitle("Ποιότητα στην Εκπαίδευση");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 891, 643);
@@ -87,18 +99,27 @@ public class ViewTeachersPage extends JFrame {
 		contentPane.add(lastnameText);
 		lastnameText.setColumns(10);
 		
-		JButton btnSearch = new JButton("Αναζήτηση");
-	
-		btnSearch.setBackground(new Color(0, 128, 0));
-		btnSearch.setForeground(new Color(255, 255, 255));
-		btnSearch.setBounds(304, 130, 125, 40);
-		contentPane.add(btnSearch);
+		JButton btnNewButton = new JButton("Αναζήτηση");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buildTable();
+			}
+		});
+		btnNewButton.setBackground(new Color(0, 128, 0));
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBounds(304, 130, 125, 40);
+		contentPane.add(btnNewButton);
 		
-		JButton btnCleanUp = new JButton("Εκκαθάριση");
-		
-		btnCleanUp.setForeground(new Color(192, 192, 192));
-		btnCleanUp.setBounds(439, 130, 125, 40);
-		contentPane.add(btnCleanUp);
+		JButton btnNewButton_1 = new JButton("Εκκαθάριση");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lastnameText.setText("");
+				buildTable();
+			}
+		});
+		btnNewButton_1.setForeground(new Color(192, 192, 192));
+		btnNewButton_1.setBounds(439, 130, 125, 40);
+		contentPane.add(btnNewButton_1);
 		
 		JLabel lblNewLabel = new JLabel("Αιτήσεις Εκπαιδευτών");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -107,6 +128,27 @@ public class ViewTeachersPage extends JFrame {
 		
 		
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Check if the selection is still adjusting
+                if (!e.getValueIsAdjusting()) {
+                    // Get the selected row index
+                    int selectedRow = table.getSelectedRow();
+
+                    // Check if a row is selected
+                    if (selectedRow != -1) {
+                        // Get data from the selected row
+                        //String selectedStr = (String) model.getValueAt(selectedRow, 0); // ID column
+                        //selectedId = Integer.parseInt(selectedStr);
+                        //selectedId = Integer.parseInt(selectedStr);
+                    	selectedUUID = (String) model.getValueAt(selectedRow, 0);
+                        
+                    }
+                }
+            }
+        });
 		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -123,40 +165,43 @@ public class ViewTeachersPage extends JFrame {
 		contentPane.add(scrollPane);
 		
 		JButton viewBtn = new JButton("Προβολή");
+		viewBtn.setForeground(new Color(255, 255, 255));
 		viewBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.getViewTeachersPage().setEnabled(false);
 				Main.getTeacherView().setVisible(true);
 			}
 		});
-		viewBtn.setForeground(new Color(255, 255, 255));
-		
 		viewBtn.setBackground(new Color(0, 128, 0));
 		viewBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		viewBtn.setBounds(619, 229, 202, 52);
 		contentPane.add(viewBtn);
 		
 		JButton updateBtn = new JButton("Επεξεργασία");
+		updateBtn.setForeground(new Color(255, 255, 255));
 		updateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.getViewTeachersPage().setEnabled(false);
 				Main.getUpdateTeacherPage().setVisible(true);
 			}
 		});
-		updateBtn.setForeground(new Color(255, 255, 255));
-		
 		updateBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		updateBtn.setBackground(new Color(0, 128, 64));
 		updateBtn.setBounds(619, 292, 202, 52);
 		contentPane.add(updateBtn);
 		
-		JButton deleteBtn = new JButton("Διαγραφή");
-		deleteBtn.setForeground(new Color(255, 255, 255));
-	
-		deleteBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		deleteBtn.setBackground(new Color(0, 128, 64));
-		deleteBtn.setBounds(619, 355, 202, 52);
-		contentPane.add(deleteBtn);
+		JButton btnDelete = new JButton("Διαγραφή");
+		btnDelete.setForeground(new Color(255, 255, 255));
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//doDelete(selectedId);
+				doDelete(selectedUUID);
+			}
+		});
+		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnDelete.setBackground(new Color(0, 128, 64));
+		btnDelete.setBounds(619, 355, 202, 52);
+		contentPane.add(btnDelete);
 		
 		JSeparator lineBottom_2 = new JSeparator();
 		lineBottom_2.setBackground(Color.BLUE);
@@ -170,20 +215,77 @@ public class ViewTeachersPage extends JFrame {
 				Main.getDashboard().setEnabled(true);
 			}
 		});
-		
 		closeBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		closeBtn.setBackground(Color.LIGHT_GRAY);
 		closeBtn.setBounds(619, 445, 202, 52);
 		contentPane.add(closeBtn);
 		
-		JLabel lblLastaname = new JLabel("Επώνυμο");
-		lblLastaname.setBounds(57, 128, 57, 44);
-		contentPane.add(lblLastaname);
+		JLabel lblNewLabel_1 = new JLabel("Επώνυμο");
+		lblNewLabel_1.setBounds(57, 128, 57, 44);
+		contentPane.add(lblNewLabel_1);
 		//contentPane.add(table);
 	}
 	
 	
-	public int getSelectedId() {
-		return selectedId;
+//	public int getSelectedId() {
+//		return selectedId;
+//	}
+	public String getSelectedId() {
+		return selectedUUID;
+	}
+
+
+
+	private void buildTable() {
+//	    String sql = "SELECT id, firstname, lastname FROM teachers WHERE lastname LIKE ?";
+		String sql = "SELECT uuid, firstname, lastname FROM teachers WHERE lastname LIKE ?";
+	    Connection conn = Dashboard.getConnection();
+	    
+	    try (
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setString(1, lastnameText.getText().trim() + "%");
+	        ResultSet rs = ps.executeQuery();
+	        
+	        model.setRowCount(0); // Clear the table
+	        while (rs.next()) {
+	            Object[] row = {
+	            	rs.getString("uuid"), //.substring(0, 8),
+//	                rs.getString("id"),
+	                rs.getString("firstname"),
+	                rs.getString("lastname")
+	            };
+	            model.addRow(row);
+	        }
+	    } catch (SQLException e) {
+	    	e.printStackTrace();
+	        JOptionPane.showMessageDialog(null, "Select error", "Error", JOptionPane.ERROR_MESSAGE);
+	    }
+	}
+	
+	//private void doDelete(int id) {
+	private void doDelete(String uuid) {
+//		String sql = "DELETE FROM teachers WHERE id = ?";
+		String sql = "DELETE FROM teachers WHERE uuid = ?";
+		Connection conn = Dashboard.getConnection();
+		
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+			
+			//ps.setInt(1, id);
+			ps.setString(1, uuid);
+			
+			int answer = JOptionPane.showConfirmDialog(null, "Είστε σίγουρη/ος", "Διαγραφή", 
+					JOptionPane.YES_NO_OPTION);
+			if (answer == JOptionPane.YES_OPTION) {
+				int rowsAffected = ps.executeUpdate();
+				JOptionPane.showMessageDialog(null, rowsAffected + " γρααμμή/ες διαγράφηκαν", "Διαγραφή", 
+						JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				return;
+			}							
+		} catch (SQLException ex) {
+			//ex.printStackTrace();
+			JOptionPane.showMessageDialog(null,  "Delete error", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

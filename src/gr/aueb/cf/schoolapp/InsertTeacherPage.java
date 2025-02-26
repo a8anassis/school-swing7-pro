@@ -316,7 +316,7 @@ public class InsertTeacherPage extends JFrame {
 					
 					JOptionPane.showMessageDialog(null,  n + " record(s) inserted", "INSERT", JOptionPane.PLAIN_MESSAGE);	
 				} catch (SQLException e1) {			
-				    // e1.printStackTrace();
+				    e1.printStackTrace();
 					JOptionPane.showMessageDialog(null,  "Insertion error", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}

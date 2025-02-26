@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-//import gr.aueb.cf.schoolapp.model.City;
+import gr.aueb.cf.schoolapp.model.City;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -43,12 +43,28 @@ public class TeacherView extends JFrame {
 	private JLabel cityText;
 	private JLabel zipcodeText;
 
-	//private List<City> cities = new ArrayList<>();
+	private List<City> cities = new ArrayList<>();
 	
 	
 	public TeacherView() {
-	
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				cities = fetchCitiesFromDatabase();
+				//cities.forEach(city -> cityComboBox.addItem(city));
+				fetchTeacherFromDatabase(Main.getViewTeachersPage().getSelectedId());
+			}
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+//				cities = fetchCitiesFromDatabase();
+				//cities.forEach(city -> cityComboBox.addItem(city));
+				
+//				fetchTeacherFromDatabase(Main.getViewTeachersPage().getSelectedId());
+
+			}
+		});
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 753, 664);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -185,16 +201,15 @@ public class TeacherView extends JFrame {
 		lblZipcode.setBounds(70, 452, 128, 27);
 		contentPane.add(lblZipcode);
 		
-		JButton btnClose = new JButton("Κλείσιμο");
-		btnClose.addActionListener(new ActionListener() {
+		JButton btnNewButton = new JButton("Κλείσιμο");
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.getViewTeachersPage().setEnabled(true);
 				Main.getTeacherView().setVisible(false);
 			}
 		});
-		
-		btnClose.setBounds(469, 471, 134, 57);
-		contentPane.add(btnClose);
+		btnNewButton.setBounds(469, 471, 134, 57);
+		contentPane.add(btnNewButton);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(20, 233, 597, 1);
@@ -209,5 +224,75 @@ public class TeacherView extends JFrame {
 		contentPane.add(separator_1_1);
 	}
 	
+//	private void fetchTeacherFromDatabase(int id) {
+	private void fetchTeacherFromDatabase(String uuid) {
+//		String sql = "SELECT * FROM teachers WHERE id = ?";
+		String sql = "SELECT * FROM teachers WHERE uuid = ?";
+		Connection conn = Dashboard.getConnection();
+		
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+			
+			//ps.setInt(1, id);
+			ps.setString(1, uuid);
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				kwdikosText.setText(rs.getString("uuid")); //.substring(0, 8));
+				firstnameText.setText(rs.getString("firstname"));
+				lastnameText.setText(rs.getString("lastname"));
+				vatText.setText(rs.getString("vat"));
+				fathernameText.setText(rs.getString("fathername"));
+				phoneNumText.setText(rs.getString("phone_num"));
+				emailText.setText(rs.getString("email"));
+				streetText.setText(rs.getString("street"));
+				streetNumText.setText(rs.getString("street_num"));
+				//cityComboBox.setSelectedIndex(rs.getInt("city_id")-1);
+				int cityIdFromDB = rs.getInt("city_id"); // Get city_id from DB
+//				System.out.println("city_id" + cityIdFromDB);
+				// Find the matching city using Streams
+				City selectedCity = cities.stream()
+				    .filter(city -> city.getId() == cityIdFromDB)
+				    .findFirst()
+				    .orElse(null); // Returns null if no match is found
+//				System.out.println("Selected City: " + selectedCity);
+				// Select the city in the JComboBox
+				if (selectedCity != null) {
+				    cityText.setText(selectedCity.getName());
+				} //else cityComboBox.setSelectedIndex(0);
+				
+//				City selectedCity = (City) cityComboBox.getSelectedItem();
+//				int cityId = selectedCity.getId();
+				
+				zipcodeText.setText(rs.getString("zipcode"));
+//				errorFirstname.setText("");
+//				errorLastname.setText("");
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,  "Select error in fetch teacher", "Error", JOptionPane.ERROR_MESSAGE);	
+		}
+	}
 	
+	private List<City> fetchCitiesFromDatabase() {
+		String sql = "SELECT * FROM cities order by name asc";
+		List<City> cities = new ArrayList<>();
+		Connection conn = Dashboard.getConnection();
+		
+		try (PreparedStatement ps = conn.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery()) {
+			
+	        while (rs.next()) {
+	            int id = rs.getInt("id"); // Get the id column
+	            String name = rs.getString("name"); // Get the name column
+
+	            // Create a City object and add it to the list
+	            City city = new City(id, name);
+	            cities.add(city);
+	        }     
+		} catch (SQLException e) {
+			//e.printStackTrace();
+			JOptionPane.showMessageDialog(null,  "Select error in fetch cities", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		return cities;	
+	}
 }

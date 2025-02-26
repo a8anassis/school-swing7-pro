@@ -64,6 +64,7 @@ public class InsertTeacherPage extends JFrame {
 				phoneNumberText.setText("");
 				emailText.setText("");
 				streetText.setText("");
+				streetNumberText.setText("");
 				cityComboBox.setSelectedIndex(0);
 				zipcodeText.setText("");
 				errorFirstname.setText("");

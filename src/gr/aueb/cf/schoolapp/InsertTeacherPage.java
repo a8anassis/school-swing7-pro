@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import gr.aueb.cf.schoolapp.model.City;
+
 //import gr.aueb.cf.schoolapp.model.City;
 
 import javax.swing.JLabel;
@@ -44,10 +46,29 @@ public class InsertTeacherPage extends JFrame {
 	private JTextField zipcodeText;
 	private JLabel errorFirstname;
 	private JLabel errorLastname;
-	//private JComboBox<City> cityComboBox;
-	//private List<City> cities = new ArrayList<>();
+	private JComboBox<City> cityComboBox;
+	private List<City> cities = new ArrayList<>();
 	
 	public InsertTeacherPage() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				cities = fetchCitiesFromDatabase();
+				cities.forEach(city -> cityComboBox.addItem(city));
+				
+				firstnameText.setText("");
+				lastnameText.setText("");
+				vatText.setText("");
+				fathernameText.setText("");
+				phoneNumberText.setText("");
+				emailText.setText("");
+				streetText.setText("");
+				cityComboBox.setSelectedIndex(0);
+				zipcodeText.setText("");
+				errorFirstname.setText("");
+				errorLastname.setText("");
+			}
+		});
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setTitle("Ποιότητα στην Εκπαίδευση");
@@ -212,9 +233,9 @@ public class InsertTeacherPage extends JFrame {
 		errorLastname.setBounds(514, 167, 260, 29);
 		contentPane.add(errorLastname);
 		
-//		cityComboBox = new JComboBox<>();
-//		cityComboBox.setBounds(89, 407, 263, 37);
-//		contentPane.add(cityComboBox);
+		cityComboBox = new JComboBox<>();
+		cityComboBox.setBounds(89, 407, 263, 37);
+		contentPane.add(cityComboBox);
         
 		
 		JButton insertBtn = new JButton("Υποβολή");
@@ -244,5 +265,28 @@ public class InsertTeacherPage extends JFrame {
 		contentPane.add(closeBtn);	
 	}
 	
-	
+	private List<City> fetchCitiesFromDatabase() {
+		String sql = "SELECT * FROM cities order by name asc";
+		List<City> cities = new ArrayList();
+		
+		Connection connection = Dashboard.getConnection();
+		
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
+			
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				
+				City city = new City(id, name);
+				cities.add(city);
+			}
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,  "Select cities error", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		return cities;
+	}
 }

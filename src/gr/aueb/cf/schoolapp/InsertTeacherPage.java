@@ -27,6 +27,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -289,7 +290,34 @@ public class InsertTeacherPage extends JFrame {
 				
 				// Insert
 				
+				String sql = "INSERT INTO teachers (firstname, lastname, vat, fathername, phone_num, "
+            			+ "email, street, street_num, zipcode, city_id, uuid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				
+            	Connection conn = Dashboard.getConnection();
+            	
+				try (PreparedStatement ps = conn.prepareStatement(sql)) {
+					
+					ps.setString(1, firstname);
+					ps.setString(2, lastname);
+					ps.setString(3, vat);
+					ps.setString(4, fathername);
+					ps.setString(5, phoneNumber);
+					ps.setString(6, email);
+					ps.setString(7, street);
+					ps.setString(8, streetNumber);
+					ps.setString(9, zipcode);
+					ps.setInt(10,cityId);
+					
+					String uuid = UUID.randomUUID().toString();
+				    ps.setString(11, uuid);
+					
+					int n = ps.executeUpdate();
+					
+					JOptionPane.showMessageDialog(null,  n + " record(s) inserted", "INSERT", JOptionPane.PLAIN_MESSAGE);	
+				} catch (SQLException e1) {			
+				    // e1.printStackTrace();
+					JOptionPane.showMessageDialog(null,  "Insertion error", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
